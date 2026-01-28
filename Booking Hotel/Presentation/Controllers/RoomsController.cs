@@ -25,14 +25,14 @@ namespace Booking_Hotel.Presentation.Controllers
             return Ok(room);
         }
 
-        [HttpGet(Name = "GetAll")]
+        [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var rooms = await _roomService.GetAllAsync();
             return Ok(rooms);
         }
 
-        [HttpPost(Name = "AddRoom")]
+        [HttpPost]
         public async Task<IActionResult> AddRoom(RoomCreateDto dto)
         {
             var room = await _roomService.AddRoomAsync(dto);

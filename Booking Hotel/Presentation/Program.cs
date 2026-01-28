@@ -3,6 +3,7 @@ using Booking_Hotel.Application.Services;
 using Booking_Hotel.Domain.Interfaces;
 using Booking_Hotel.Infrastructure;
 using Booking_Hotel.Infrastructure.Repositories;
+using Booking_Hotel.Infrastructure.Security;
 using Booking_Hotel.Presentation.Middleware;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
@@ -25,6 +26,10 @@ builder.Services.AddDbContext<AppDbContext>(options => options.UseNpgsql(connect
 
 builder.Services.AddScoped<IRoomRepository, RoomRepository>();
 builder.Services.AddScoped<RoomService>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<UserService>();
+
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddAutoMapper(typeof(RoomProfile).Assembly);
 
 var app = builder.Build();
