@@ -26,6 +26,11 @@ namespace Booking_Hotel.Infrastructure.Repositories
             return await _context.Users.FirstOrDefaultAsync(u=> u.Id == id);
         }
 
+        public async Task<User?> GetByNameAsync(string name)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Name == name);
+        }
+
         public async Task<IReadOnlyList<User>> GetAllAsync()
         {
             return await _context.Users.ToListAsync();

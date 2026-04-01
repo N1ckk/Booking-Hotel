@@ -1,5 +1,6 @@
 ﻿using Booking_Hotel.Application.DTOs;
 using Booking_Hotel.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata.Ecma335;
@@ -18,6 +19,7 @@ namespace Booking_Hotel.Presentation.Controllers
             _roomService = roomService;
         }
 
+        [Authorize]
         [HttpGet("{id}", Name = "GetById")]
         public async Task<IActionResult> GetById(int id)
         {
@@ -25,6 +27,7 @@ namespace Booking_Hotel.Presentation.Controllers
             return Ok(room);
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -32,6 +35,7 @@ namespace Booking_Hotel.Presentation.Controllers
             return Ok(rooms);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> AddRoom(RoomCreateDto dto)
         {
@@ -42,6 +46,7 @@ namespace Booking_Hotel.Presentation.Controllers
                 room);
         }
 
+        [Authorize(Roles ="Admin")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateRoom(int id, RoomUpdateDto dto)
         {
@@ -49,6 +54,7 @@ namespace Booking_Hotel.Presentation.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteRoom(int id)
         {

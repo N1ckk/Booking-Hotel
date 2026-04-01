@@ -46,6 +46,18 @@ namespace Booking_Hotel.Application.Services
             return _mapper.Map<UserDto>(user);
         }
 
+        public async Task<UserDto> GetByNameAsync(string name)
+        {
+            var user = await _userRepository.GetByNameAsync(name);
+
+            if(user==null)
+            {
+                throw new KeyNotFoundException($"User with name {name} not found.");
+            }
+
+            return _mapper.Map<UserDto>(user);
+        }
+
         public async Task<IReadOnlyList<UserDto>> GetAllAsync()
         {
             var users = await _userRepository.GetAllAsync();
